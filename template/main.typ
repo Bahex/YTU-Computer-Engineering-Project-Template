@@ -88,14 +88,15 @@
     number-width: "tabular",
     size: 12pt,
   )
+
+  #frontpage(title, thesis_type, students, advisor, date)
+  #copyright_notice
+  
   #set par(
     leading: 0.90em,
     justify: true,
     spacing: 2em,
   )
-
-  #frontpage(title, thesis_type, students, advisor, date)
-  #copyright_notice
 
   #counter(page).update(1)
   #set page(numbering: "i")
