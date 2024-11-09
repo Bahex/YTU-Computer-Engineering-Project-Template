@@ -146,16 +146,6 @@
   ],
 )
 
-#context if query(figure).len() > 0 [
-  = ŞEKİL LİSTESİ
-  #outline(title: none, target: figure)
-]
-
-#set heading(numbering: "1.1")
-#set page(numbering: "1")
-
-#counter(page).update(1)
-
 = GİRİŞ
 
 Giriş bölümü, okuyucunun konuyu anlayıp projenin amacını ve konuya nasıl bir

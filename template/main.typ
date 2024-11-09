@@ -91,7 +91,7 @@
 
   #frontpage(title, thesis_type, students, advisor, date)
   #copyright_notice
-  
+
   #set par(
     leading: 0.90em,
     justify: true,
@@ -196,6 +196,11 @@
   #if keywords not in ((), none) [
     #set terms(hanging-indent: 0pt)
     / Anahtar Kelimeler: #keywords.join(", ")
+  ]
+
+  #context if query(figure).len() > 0 [
+    = ŞEKİL LİSTESİ
+    #outline(title: none, target: figure)
   ]
 
   #set heading(numbering: "1.1")
