@@ -198,11 +198,6 @@
     / Anahtar Kelimeler: #keywords.join(", ")
   ]
 
-  #context if query(figure).len() > 0 [
-    = ŞEKİL LİSTESİ
-    #outline(title: none, target: figure)
-  ]
-
   #set heading(numbering: "1.1")
   #set page(numbering: "1")
 
