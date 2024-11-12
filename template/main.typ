@@ -158,34 +158,30 @@
     )
   }
 
+  #let terms-to-grid(
+    columns: (auto, 1fr),
+    column-gutter: 4em,
+    row-gutter: 1.5em,
+    it,
+  ) = grid(
+    columns: columns,
+    column-gutter: column-gutter,
+    row-gutter: row-gutter,
+    ..it.children.map(c => (c.term, c.description)).flatten()
+  )
+
   #if symbols not in ([], none) [
     = SİMGE LİSTESİ
 
-    #{
-      show terms: it => grid(
-        columns: (auto, 1fr),
-        column-gutter: 4em,
-        row-gutter: 1.5em,
-        ..it.children.map(c => (c.term, c.description)).flatten()
-      )
-
-      symbols
-    }
+    #show terms: terms-to-grid
+    #symbols
   ]
 
   #if abbreviations not in ([], none) [
     = KISALTMA LİSTESİ
 
-    #{
-      show terms: it => grid(
-        columns: (auto, 1fr),
-        column-gutter: 4em,
-        row-gutter: 1.5em,
-        ..it.children.map(c => (c.term, c.description)).flatten()
-      )
-
-      abbreviations
-    }
+    #show terms: terms-to-grid
+    #abbreviations
   ]
 
   #context if query(figure).len() > 0 [
