@@ -58,6 +58,25 @@
   #v(2mm)
 ]
 
+#let make_abstract(title, students, advisor, abstract) = [
+  = ÖZET
+  #[
+    #set align(center)
+    #set par(justify: false)
+    #text(size: font_sizes.Large)[*#title*]
+
+    #for student in students [
+      #student.name\
+    ]
+
+    Bilgisayar Mühendisliği Bölümü\
+    Bilgisayar Projesi
+
+    Danışman: #advisor
+  ]
+  #abstract
+]
+
 #let copyright_notice = page[
   #set align(bottom + center)
   #set text(size: font_sizes.footnotesize)
@@ -174,29 +193,14 @@
     #outline(title: none, target: figure)
   ]
 
-  #if abstract not in ([], none) [
-    = ÖZET
-    #[
-      #set align(center)
-      #set par(justify: false)
-      #text(size: font_sizes.Large)[*#title*]
+  #if abstract not in ([], none) {
+    make_abstract(title, students, advisor, abstract)
 
-      #for student in students [
-        #student.name\
-      ]
-
-      Bilgisayar Mühendisliği Bölümü\
-      Bilgisayar Projesi
-
-      Danışman: #advisor
+    if keywords not in ((), none) [
+      #set terms(hanging-indent: 0pt)
+      / Anahtar Kelimeler: #keywords.join(", ")
     ]
-    #abstract
-  ]
-
-  #if keywords not in ((), none) [
-    #set terms(hanging-indent: 0pt)
-    / Anahtar Kelimeler: #keywords.join(", ")
-  ]
+  }
 
   #set heading(numbering: "1.1")
   #set page(numbering: "1")
