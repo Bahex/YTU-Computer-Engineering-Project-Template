@@ -84,6 +84,18 @@
   #pad(x: -5em)[*#sym.copyright Bu projenin bütün hakları Yıldız Teknik Üniversitesi Bilgisayar Mühendisliği Bölümü'ne aittir.*]
 ]
 
+#let terms-to-grid(
+  columns: (auto, 1fr),
+  column-gutter: 4em,
+  row-gutter: 1.5em,
+  it,
+) = grid(
+  columns: columns,
+  column-gutter: column-gutter,
+  row-gutter: row-gutter,
+  ..it.children.map(c => (c.term, c.description)).flatten()
+)
+
 #let template(
   title: [TITLE],
   thesis_type: [THESIS],
@@ -157,18 +169,6 @@
       indent: auto,
     )
   }
-
-  #let terms-to-grid(
-    columns: (auto, 1fr),
-    column-gutter: 4em,
-    row-gutter: 1.5em,
-    it,
-  ) = grid(
-    columns: columns,
-    column-gutter: column-gutter,
-    row-gutter: row-gutter,
-    ..it.children.map(c => (c.term, c.description)).flatten()
-  )
 
   #if symbols not in ([], none) [
     = SİMGE LİSTESİ
