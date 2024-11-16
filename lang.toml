@@ -1,0 +1,26 @@
+[conf]
+default-lang = "tur"
+
+[lang.tur]
+"TÜRKİYE CUMHURİYETİ" = "TÜRKİYE CUMHURİYETİ"
+"YILDIZ TEKNİK ÜNİVERSİTESİ" = "YILDIZ TEKNİK ÜNİVERSİTESİ"
+"BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ" = "BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"
+"ÖZET" = "ÖZET"
+"Bilgisayar Mühendisliği Bölümü" = "Bilgisayar Mühendisliği Bölümü"
+"Bilgisayar Projesi" = "Bilgisayar Projesi"
+"Danışman" = "Danışman"
+"copyright notice" = "Bu projenin bütün hakları Yıldız Teknik Üniversitesi Bilgisayar Mühendisliği Bölümü'ne aittir"
+"TEŞEKKÜR" = "TEŞEKKÜR"
+"İÇİNDEKİLER" = "İÇİNDEKİLER"
+"SİMGE LİSTESİ" = "SİMGE LİSTESİ"
+"KISALTMA LİSTESİ" = "KISALTMA LİSTESİ"
+"ŞEKİL LİSTESİ" = "ŞEKİL LİSTESİ"
+"TABLO LİSTESİ" = "TABLO LİSTESİ"
+"Anahtar Kelimeler" = "Anahtar Kelimeler"
+"Özgeçmiş" = "Özgeçmiş"
+"İsim-Soyisim" = "İsim-Soyisim"
+"Doğum Tarihi ve Yeri" = "Doğum Tarihi ve Yeri"
+"Email" = "Email"
+"Telefon" = "Telefon"
+
+[lang.en]

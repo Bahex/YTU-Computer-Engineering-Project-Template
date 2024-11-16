@@ -1,5 +1,7 @@
 #import "@preview/outrageous:0.1.0"
 #import "@preview/i-figured:0.2.4"
+#import "@preview/linguify:0.4.1"
+#import linguify: linguify as l
 
 #let font_sizes = (
   tiny: 6pt,
@@ -20,9 +22,9 @@
   #v(2mm)
   #[
     #set text(size: font_sizes.large)
-    *TÜRKİYE CUMHURİYETİ\
-    YILDIZ TEKNİK ÜNİVERSİTESİ\
-    BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ*
+    *#l("TÜRKİYE CUMHURİYETİ")\
+    #l("YILDIZ TEKNİK ÜNİVERSİTESİ")\
+    #l("BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ")*
   ]
 
   #v(3mm)
@@ -50,7 +52,7 @@
 
   #v(2.2cm)
   #set text(size: font_sizes.normalsize)
-  Danışman\ #advisor
+  #l("Danışman")\ #advisor
 
   #v(1.78cm)
   #set text(size: font_sizes.large)
@@ -59,7 +61,7 @@
 ]
 
 #let make_abstract(title, students, advisor, abstract) = [
-  = ÖZET
+  = #l("ÖZET")
   #[
     #set align(center)
     #set par(justify: false)
@@ -69,10 +71,10 @@
       #student.name\
     ]
 
-    Bilgisayar Mühendisliği Bölümü\
-    Bilgisayar Projesi
+    #l("Bilgisayar Mühendisliği Bölümü")\
+    #l("Bilgisayar Projesi")
 
-    Danışman: #advisor
+    #l("Danışman"): #advisor
   ]
   #abstract
 ]
@@ -81,7 +83,7 @@
   #set align(bottom + center)
   #set text(size: font_sizes.footnotesize)
   // The negative padding counteracts page margins, making the following fit on a single line.
-  #pad(x: -5em)[*#sym.copyright Bu projenin bütün hakları Yıldız Teknik Üniversitesi Bilgisayar Mühendisliği Bölümü'ne aittir.*]
+  #pad(x: -5em)[*#sym.copyright #l("copyright notice").*]
 ]
 
 #let terms-to-grid(
@@ -109,6 +111,8 @@
   acknowledgement: [],
   it,
 ) = [
+  #linguify.set-database(toml("/lang.toml"))
+
   #set page(
     paper: "a4",
     margin: (left: 35mm, rest: 25mm),
@@ -132,6 +136,7 @@
   #counter(page).update(1)
   #set page(numbering: "i")
 
+  // Section header rule
   #show heading.where(level: 1): it => {
     set align(end)
     pagebreak(weak: true)
@@ -150,7 +155,7 @@
   }
 
   #if acknowledgement not in ([], none) [
-    #heading(outlined: false)[TEŞEKKÜR]
+    #heading(outlined: false)[#l("TEŞEKKÜR")]
     #set text(size: font_sizes.normalsize)
     #acknowledgement
   ]
@@ -165,28 +170,33 @@
     )
 
     outline(
-      title: [İÇİNDEKİLER],
+      title: [#l("İÇİNDEKİLER")],
       indent: auto,
     )
   }
 
   #if symbols not in ([], none) [
-    = SİMGE LİSTESİ
+    = #l("SİMGE LİSTESİ")
 
     #show terms: terms-to-grid
     #symbols
   ]
 
   #if abbreviations not in ([], none) [
-    = KISALTMA LİSTESİ
+    = #l("KISALTMA LİSTESİ")
 
     #show terms: terms-to-grid
     #abbreviations
   ]
 
-  #context if query(figure).len() > 0 [
-    = ŞEKİL LİSTESİ
+  #context if query(figure.where(kind: image)).len() > 0 [
+    = #l("ŞEKİL LİSTESİ")
     #outline(title: none, target: figure)
+  ]
+
+  #context if query(figure.where(kind: table)).len() > 0 [
+    = #l("TABLO LİSTESİ")
+    #outline(title: none, target: table)
   ]
 
   #if abstract not in ([], none) {
@@ -194,7 +204,7 @@
 
     if keywords not in ((), none) [
       #set terms(hanging-indent: 0pt)
-      / Anahtar Kelimeler: #keywords.join(", ")
+      / #l("Anahtar Kelimeler"): #keywords.join(", ")
     ]
   }
 
@@ -207,13 +217,13 @@
 
   #bibliography("/references.bib", title: "Referanslar", style: "ieee")
 
-  #heading(numbering: none)[Özgeçmiş]
+  #heading(numbering: none)[#l("Özgeçmiş")]
 
   #for student in students [
     #set terms(separator: [: ])
-    / İsim-Soyisim: #student.name
-    / Doğum Tarihi ve Yeri: #student.birthdate.display("[day].[month].[year]"), #student.birthplace
-    / Email: #link("mailto:" + student.email)
-    / Telefon: #student.phone
+    / #l("İsim-Soyisim"): #student.name
+    / #l("Doğum Tarihi ve Yeri"): #student.birthdate.display("[day].[month].[year]"), #student.birthplace
+    / #l("Email"): #link("mailto:" + student.email)
+    / #l("Telefon"): #student.phone
   ]
 ]
