@@ -3,7 +3,7 @@
 #import "@preview/cetz:0.3.1"
 #set page(width: auto, height: auto, margin: 2em)
 
-#cetz.canvas({
+#let shape = cetz.canvas({
   import cetz.draw: *
 
   set-style(
@@ -35,3 +35,5 @@
     line("outer", (x + 41deg, 4))
   }
 })
+
+#shape

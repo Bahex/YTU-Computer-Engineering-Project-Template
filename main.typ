@@ -1,4 +1,5 @@
 #import "/template/main.typ": template
+#import "/examples/drawing-01.typ": shape
 
 #set text(lang: "tur")
 
@@ -162,9 +163,18 @@ tanıtılmalıdır.
 
 == Amaç
 
+#lorem(30)
+
 == Ön İnceleme
 
+#lorem(20)
+
+#lorem(40)
+
 = SİSTEM ANALİZİ VE FİZİBİLİTE
+
+#lorem(15)
+
 == Sistem Analizi
 
 Sistem analizinin amacı, projede en uygun çözümü bulmak için ana öğeler ve
@@ -196,6 +206,34 @@ de bu bölümde tanımlanmalıdır.
 === İş Gücü ve Zaman Fizibilite
 
 = SİSTEM TASARIMI
+
+#lorem(40)
+
+#figure(
+  table(
+    columns: 3,
+    table.header(
+      table.cell(rowspan: 2, [A]),
+      table.cell(colspan: 2, [B]),
+      [C],
+      [D],
+    ),
+
+    [1], [2], [3],
+    [10], [20], [30],
+    [100], [200], [300],
+  ),
+  caption: "Bir tablo",
+)
+
+#lorem(25)
+
+#figure(
+  shape,
+  kind: image,
+  caption: "2 boyutlu geometrik bir cisim.",
+)
+
 == Arayüz Tasarımı
 
 = UYGULAMA SONUÇLARI ve TESTLER

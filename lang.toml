@@ -2,6 +2,8 @@
 default-lang = "tur"
 
 [lang.tur]
+"Tablo" = "Tablo"
+"Şekil" = "Şekil"
 "TÜRKİYE CUMHURİYETİ" = "TÜRKİYE CUMHURİYETİ"
 "YILDIZ TEKNİK ÜNİVERSİTESİ" = "YILDIZ TEKNİK ÜNİVERSİTESİ"
 "BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ" = "BİLGİSAYAR MÜHENDİSLİĞİ BÖLÜMÜ"

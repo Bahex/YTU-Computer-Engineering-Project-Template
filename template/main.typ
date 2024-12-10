@@ -206,12 +206,17 @@
 
     if keywords not in ((), none) [
       #set terms(hanging-indent: 0pt)
+
       / #l("Anahtar Kelimeler"): #keywords.join(", ")
     ]
   }
 
   #set heading(numbering: "1.1")
   #set page(numbering: "1")
+
+  #show figure.where(kind: image): set figure(supplement: l("Şekil"))
+  #show figure.where(kind: table): set figure(supplement: l("Tablo"))
+  #show figure.where(kind: table): set figure.caption(position: top)
 
   #counter(page).update(1)
 
