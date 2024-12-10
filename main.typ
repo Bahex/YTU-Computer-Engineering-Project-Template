@@ -204,3 +204,4 @@ de bu bölümde tanımlanmalıdır.
 == Doğrulama
 
 = SONUÇ VE TARTIŞMA
+
