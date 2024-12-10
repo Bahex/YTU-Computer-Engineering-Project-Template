@@ -95,6 +95,7 @@
   abbreviations: [],
   symbols: [],
   acknowledgement: [],
+  doc_type: none,
   it,
 ) = [
   #set page(
@@ -184,9 +185,14 @@
     #abbreviations
   ]
 
-  #context if query(figure).len() > 0 [
+  #context if query(figure.where(kind: image)).len() > 0 [
     = ŞEKİL LİSTESİ
-    #outline(title: none, target: figure)
+    #outline(title: none, target: figure.where(kind: image))
+  ]
+
+  #context if query(figure.where(kind: table)).len() > 0 [
+    = TABLO LİSTESİ
+    #outline(title: none, target: figure.where(kind: table))
   ]
 
   #if abstract not in ([], none) {
@@ -203,6 +209,12 @@
 
   #counter(page).update(1)
 
+  #assert(("sw", "arge").contains(doc_type))
+  #if doc_type == "sw" {
+    
+  } else if doc_type == "arge" {
+    
+  }
   #it
 
   #bibliography("/references.bib", title: "Referanslar", style: "ieee")
