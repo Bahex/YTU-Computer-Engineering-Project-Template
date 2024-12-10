@@ -185,14 +185,16 @@
     #abbreviations
   ]
 
-  #context if query(figure.where(kind: image)).len() > 0 [
+  #let selector_figures = figure.where(kind: image)
+  #context if query(selector_figures).len() > 0 [
     = ŞEKİL LİSTESİ
-    #outline(title: none, target: figure.where(kind: image))
+    #outline(title: none, target: selector_figures)
   ]
 
-  #context if query(figure.where(kind: table)).len() > 0 [
+  #let selector_tables = figure.where(kind: table)
+  #context if query(selector_tables).len() > 0 [
     = TABLO LİSTESİ
-    #outline(title: none, target: figure.where(kind: table))
+    #outline(title: none, target: selector_tables)
   ]
 
   #if abstract not in ([], none) {
