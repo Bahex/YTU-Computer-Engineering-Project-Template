@@ -1,6 +1,6 @@
-#import "@preview/outrageous:0.1.0"
+#import "@preview/outrageous:0.4.0"
 #import "@preview/i-figured:0.2.4"
-#import "@preview/linguify:0.4.1"
+#import "@preview/linguify:0.4.2"
 #import linguify: linguify as l
 
 #let font_sizes = (

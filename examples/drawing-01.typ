@@ -1,6 +1,6 @@
 // Refer to the CeTZ manual at https://cetz-package.github.io/ for more information
 
-#import "@preview/cetz:0.3.1"
+#import "@preview/cetz:0.3.4"
 #set page(width: auto, height: auto, margin: 2em)
 
 #let shape = cetz.canvas({
