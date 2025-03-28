@@ -4,7 +4,10 @@
 #set text(lang: "tur")
 
 #show: template.with(
-  title: [PROJE KİTABI HAZIRLAMA ESASLARI VE LATEX TASLAĞI KULLANIMI],
+  title: (
+    tur: [PROJE KİTABI HAZIRLAMA ESASLARI VE LATEX TASLAĞI KULLANIMI],
+    en: [TODO],
+  ),
   thesis_type: "BİLGİSAYAR PROJESİ",
   advisor: "Dr. Ahmet ELBİR",
   date: [Kasım, 2024],
@@ -27,55 +30,61 @@
     ),
   ),
   keywords: (
-    "Demiryolu trafik kontrolü",
-    "Trenlerarası çatışmalar",
-    "Yeniden çizelgeleme",
-    "Genetik algoritmalar",
-    "Yapay sinir ağları",
+    tur: (
+      "Demiryolu trafik kontrolü",
+      "Trenlerarası çatışmalar",
+      "Yeniden çizelgeleme",
+      "Genetik algoritmalar",
+      "Yapay sinir ağları",
+    ),
+    en: (:),
   ),
-  abstract: [
-    Ulaştırma alt sistemlerinden biri olan demiryolu, diğer ulaştırma alt
-    sistemleriyle yoğun bir rekabet halinde bulunmaktadır. Yürütüle gelen
-    yanlış politikalar sonucu ülkemizde demiryolu ulaştırmasına olan talep,
-    yolcu ve yük taşımacılığında karayolunun oldukça gerisinde kalmıştır.
-    Demiryolunun pazar payını arttırması ve rekabetini devam ettirebilmesi için
-    hizmet kalitesini arttırması gerekmektedir. Dakiklik ve güvenilirlik bir
-    ulaştırma alt sisteminin kalitesini belirleyen ölçütlerin başında
-    gelmektedir. Bu ölçütlerin istenilen seviyede tutulabilmesi de kısmen etkin
-    trafik kontrolü ile sağlanabilir.
+  abstract: (
+    en: [ TODO ],
+    tur: [
+      Ulaştırma alt sistemlerinden biri olan demiryolu, diğer ulaştırma alt
+      sistemleriyle yoğun bir rekabet halinde bulunmaktadır. Yürütüle gelen
+      yanlış politikalar sonucu ülkemizde demiryolu ulaştırmasına olan talep,
+      yolcu ve yük taşımacılığında karayolunun oldukça gerisinde kalmıştır.
+      Demiryolunun pazar payını arttırması ve rekabetini devam ettirebilmesi için
+      hizmet kalitesini arttırması gerekmektedir. Dakiklik ve güvenilirlik bir
+      ulaştırma alt sisteminin kalitesini belirleyen ölçütlerin başında
+      gelmektedir. Bu ölçütlerin istenilen seviyede tutulabilmesi de kısmen etkin
+      trafik kontrolü ile sağlanabilir.
 
-    Trenler önceden hazırlanmış bir hareket planına uygun biçimde hareket
-    etmektedir. Ancak beklenmedik bazı olayların gerçekleşmesi sonucu
-    gecikmeler ve trenler arası çatışmalar meydana gelebilmektedir. Trafik
-    kontrolü, trenler arası çatışmaları, gecikmeleri mümkün olduğunca azaltacak
-    şekilde çözüp, yeni bir uygulanabilir çizelge hazırlamak için uygulanır.
-    Problemin zorluk derecesi nedeniyle, problemin en az gecikme içeren
-    çözümüne kabul edilebilir bir süre içerisinde ulaşılması imkânsızdır. Bu
-    çalışmada, 5 dakika gibi kısa bir süre içerisinde uygulanabilir ve gecikme
-    toplamının olabildiğince küçüklendiği bir çizelge hazırlamak için, genetik
-    algoritmalar kullanılmıştır. Geliştirilen algoritmanın çözümleri, belirli
-    boyuttaki problemlerin kesin ve dispeçer çözümleri (yapay sinir ağı) ile
-    karşılaştırıldığında, algoritma kısa sürede yeteri kadar iyi sonuçlar
-    vermektedir. Algoritmanın uygulanması için geliştirilen bilgisayar
-    programı, tren dispeçerleri için bir karar destek sistemi olarak da
-    kullanılabilir.
+      Trenler önceden hazırlanmış bir hareket planına uygun biçimde hareket
+      etmektedir. Ancak beklenmedik bazı olayların gerçekleşmesi sonucu
+      gecikmeler ve trenler arası çatışmalar meydana gelebilmektedir. Trafik
+      kontrolü, trenler arası çatışmaları, gecikmeleri mümkün olduğunca azaltacak
+      şekilde çözüp, yeni bir uygulanabilir çizelge hazırlamak için uygulanır.
+      Problemin zorluk derecesi nedeniyle, problemin en az gecikme içeren
+      çözümüne kabul edilebilir bir süre içerisinde ulaşılması imkânsızdır. Bu
+      çalışmada, 5 dakika gibi kısa bir süre içerisinde uygulanabilir ve gecikme
+      toplamının olabildiğince küçüklendiği bir çizelge hazırlamak için, genetik
+      algoritmalar kullanılmıştır. Geliştirilen algoritmanın çözümleri, belirli
+      boyuttaki problemlerin kesin ve dispeçer çözümleri (yapay sinir ağı) ile
+      karşılaştırıldığında, algoritma kısa sürede yeteri kadar iyi sonuçlar
+      vermektedir. Algoritmanın uygulanması için geliştirilen bilgisayar
+      programı, tren dispeçerleri için bir karar destek sistemi olarak da
+      kullanılabilir.
 
-    Trenler önceden hazırlanmış bir hareket planına uygun biçimde hareket
-    etmektedir. Ancak beklenmedik bazı olayların gerçekleşmesi sonucu
-    gecikmeler ve trenler arası çatışmalar meydana gelebilmektedir. Trafik
-    kontrolü, trenler arası çatışmaları, gecikmeleri mümkün olduğunca azaltacak
-    şekilde çözüp, yeni bir uygulanabilir çizelge hazırlamak için uygulanır.
-    Problemin zorluk derecesi nedeniyle, problemin en az gecikme içeren
-    çözümüne kabul edilebilir bir süre içerisinde ulaşılması imkânsızdır. Bu
-    çalışmada, 5 dakika gibi kısa bir süre içerisinde uygulanabilir ve gecikme
-    toplamının olabildiğince en küçüklendiği bir çizelge hazırlamak için,
-    genetik algoritmalar kullanılmıştır. Geliştirilen algoritmanın çözümleri,
-    belirli boyuttaki problemlerin kesin ve dispeçer çözümleri (yapay sinir
-    ağı) ile karşılaştırıldığında, algoritma kısa sürede yeteri kadar iyi
-    sonuçlar vermektedir. Algoritmanın uygulanması için geliştirilen bilgisayar
-    programı, tren dispeçerleri için bir karar destek sistemi olarak da
-    kullanılabilir.
-  ],
+      Trenler önceden hazırlanmış bir hareket planına uygun biçimde hareket
+      etmektedir. Ancak beklenmedik bazı olayların gerçekleşmesi sonucu
+      gecikmeler ve trenler arası çatışmalar meydana gelebilmektedir. Trafik
+      kontrolü, trenler arası çatışmaları, gecikmeleri mümkün olduğunca azaltacak
+      şekilde çözüp, yeni bir uygulanabilir çizelge hazırlamak için uygulanır.
+      Problemin zorluk derecesi nedeniyle, problemin en az gecikme içeren
+      çözümüne kabul edilebilir bir süre içerisinde ulaşılması imkânsızdır. Bu
+      çalışmada, 5 dakika gibi kısa bir süre içerisinde uygulanabilir ve gecikme
+      toplamının olabildiğince en küçüklendiği bir çizelge hazırlamak için,
+      genetik algoritmalar kullanılmıştır. Geliştirilen algoritmanın çözümleri,
+      belirli boyuttaki problemlerin kesin ve dispeçer çözümleri (yapay sinir
+      ağı) ile karşılaştırıldığında, algoritma kısa sürede yeteri kadar iyi
+      sonuçlar vermektedir. Algoritmanın uygulanması için geliştirilen bilgisayar
+      programı, tren dispeçerleri için bir karar destek sistemi olarak da
+      kullanılabilir.
+    ],
+  ),
   symbols: [
     / Ai: Activities of Daily Life
     / c: Alternate Step Test

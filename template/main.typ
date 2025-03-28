@@ -3,11 +3,22 @@
 #import "@preview/linguify:0.4.2"
 #import linguify: linguify as l
 
+/// linguify that needs external context, returning non-opaque output
+#let bare-linguify(key, from: auto, lang: auto, default: auto, args: auto) = {
+  import linguify.lflib: *
+  let result = _linguify(key, from: from, lang: lang, args: args)
+  if is-ok(result) {
+    result.ok
+  } else {
+    if-auto-then(default, panic(result.error))
+  }
+}
+
 #let font_sizes = (
   tiny: 6pt,
   scriptsize: 8pt,
   footnotesize: 9.6pt,
-  small: 10.95pt,
+  small: 10pt,
   normalsize: 11.5pt,
   large: 13.8pt,
   Large: 16.70pt,
@@ -15,6 +26,8 @@
   huge: 24.88pt,
   Huge: 24.88pt,
 )
+
+#let auto-heading = heading.with(numbering: none)
 
 #let frontpage(title, thesis_type, students, advisor, date) = page[
   #set align(center)
@@ -32,7 +45,11 @@
   #v(1.8cm)
 
   #set text(size: font_sizes.Large)
-  *#title*
+  #if type(title) == dictionary [
+    *#(context title.at(text.lang))*
+  ] else [
+    *#title*
+  ]
 
   #set align(horizon)
   #grid(
@@ -60,12 +77,19 @@
   #v(2mm)
 ]
 
-#let make_abstract(title, students, advisor, abstract) = [
-  = #l("ÖZET")
+#let make_abstract(title, students, advisor, abstract, keywords) = [
+  #context auto-heading(bare-linguify("ÖZET"))
   #[
     #set align(center)
     #set par(justify: false)
-    #text(size: font_sizes.Large)[*#title*]
+
+    #text(size: font_sizes.Large)[
+      #if type(title) == dictionary [
+        *#(context title.at(text.lang))*
+      ] else [
+        *#title*
+      ]
+    ]
 
     #for student in students [
       #student.name\
@@ -77,6 +101,11 @@
     #l("Danışman"): #advisor
   ]
   #abstract
+  #if keywords not in ((), none) [
+    #set terms(hanging-indent: 0pt)
+
+    / #l("Anahtar Kelimeler"): #keywords.join(", ")
+  ]
 ]
 
 #let copyright_notice = page[
@@ -111,7 +140,8 @@
   acknowledgement: [],
   it,
 ) = [
-  #linguify.set-database(toml("/lang.toml"))
+  #let lang_db = toml("/lang.toml")
+  #linguify.set-database(lang_db)
 
   #set page(
     paper: "a4",
@@ -121,7 +151,7 @@
   #set text(
     font: "XCharter",
     number-width: "tabular",
-    size: 12pt,
+    size: font_sizes.normalsize,
   )
 
   #frontpage(title, thesis_type, students, advisor, date)
@@ -136,12 +166,15 @@
   #counter(page).update(1)
   #set page(numbering: "i")
 
+  #show heading: set block(above: 3em, below: 1em)
+
   // Section header rule
   #show heading.where(level: 1): it => {
     set align(end)
     pagebreak(weak: true)
     stack(
       dir: ttb,
+      v(3em),
       if it.numbering != none [
         #set text(size: font_sizes.Huge)
         #numbering(it.numbering, ..counter(heading).get())
@@ -154,10 +187,23 @@
     )
   }
 
+  // Per-chapter figure numbering
+  #show heading.where(level: 1): it => (
+    counter(figure.where(kind: image)).update(0) + it
+  )
+  #set heading(numbering: "1")
+  #set figure(
+    numbering: num => numbering(
+      "1.1",
+      counter(heading).get().first(),
+      num,
+    ),
+  )
+
   #if acknowledgement not in ([], none) [
-    #heading(outlined: false)[#l("TEŞEKKÜR")]
-    #set text(size: font_sizes.normalsize)
+    #context auto-heading[#bare-linguify("TEŞEKKÜR")]
     #acknowledgement
+    #align(right, students.map(s => s.name).join(linebreak()))
   ]
 
   #{
@@ -176,14 +222,14 @@
   }
 
   #if symbols not in ([], none) [
-    = #l("SİMGE LİSTESİ")
+    #context auto-heading(bare-linguify("SİMGE LİSTESİ"))
 
     #show terms: terms-to-grid
     #symbols
   ]
 
   #if abbreviations not in ([], none) [
-    = #l("KISALTMA LİSTESİ")
+    #context auto-heading(bare-linguify("KISALTMA LİSTESİ"))
 
     #show terms: terms-to-grid
     #abbreviations
@@ -191,24 +237,25 @@
 
   #let selector_figures = figure.where(kind: image)
   #context if query(selector_figures).len() > 0 [
-    = #l("ŞEKİL LİSTESİ")
+    #context auto-heading(bare-linguify("ŞEKİL LİSTESİ"))
     #outline(title: none, target: selector_figures)
   ]
 
   #let selector_tables = figure.where(kind: table)
   #context if query(selector_tables).len() > 0 [
-    = #l("TABLO LİSTESİ")
+    #auto-heading(l("TABLO LİSTESİ"))
     #outline(title: none, target: selector_tables)
   ]
 
   #if abstract not in ([], none) {
-    make_abstract(title, students, advisor, abstract)
-
-    if keywords not in ((), none) [
-      #set terms(hanging-indent: 0pt)
-
-      / #l("Anahtar Kelimeler"): #keywords.join(", ")
-    ]
+    if type(abstract) == dictionary {
+      for (lang, abstract) in abstract.pairs() {
+        set text(lang: lang)
+        make_abstract(title, students, advisor, abstract, keywords.at(lang))
+      }
+    } else {
+      make_abstract(title, students, advisor, abstract, keywords)
+    }
   }
 
   #set heading(numbering: "1.1")
@@ -216,15 +263,23 @@
 
   #show figure.where(kind: image): set figure(supplement: l("Şekil"))
   #show figure.where(kind: table): set figure(supplement: l("Tablo"))
+  #show figure.where(kind: raw): set figure(supplement: l("Kod"))
   #show figure.where(kind: table): set figure.caption(position: top)
+  #set list(indent: 1.5em)
 
   #counter(page).update(1)
 
   #it
 
-  #bibliography("/references.bib", title: "Referanslar", style: "ieee")
+  #context {
+    bibliography(
+      "/references.bib",
+      title: bare-linguify("Referanslar"),
+      style: "ieee",
+    )
+  }
 
-  #heading(numbering: none)[#l("Özgeçmiş")]
+  #context heading(numbering: none, bare-linguify("Özgeçmiş"))
 
   #for student in students [
     #set terms(separator: [: ])
